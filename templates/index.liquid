@@ -21,8 +21,7 @@
           {% for variant in product.variants %}
             <li>
               <strong>{{ variant.title }}</strong><br>
-              <span>Цена: {{ variant.price | money }}</span><br>
-              <span>SKU: {{ variant.sku }}</span>
+              <span> {{ variant.sku }}</span>
               {% if variant.image %}
                 <img src="{{ variant.image | image_url: width: 50, height: 50 }}" alt="{{ variant.title }}" width="50" height="50">
               {% endif %}
