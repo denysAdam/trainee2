@@ -1,2 +1,32 @@
-{% assign variable =  "Hello" %}
-{{ variable }}
+<div class="best-sellers-section">
+  <div class="container mx-auto py-6">
+    <h2 class="text-3xl font-bold mb-6">Best Sellers</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+      {% for product in collections.best-sellers.products %}
+        <div class="product-item">
+          <a href="{{ product.url }}">
+            
+          </a>
+          <h3 class="text-lg font-semibold mt-4">{{ product.title }}</h3>
+          <p class="text-xl font-bold text-gray-800">{{ product.price | money }}</p>
+          <p class="text-sm text-gray-600">{{ product.reviews_count }} reviews</p>
+          
+          <!-- Цвета (если имеются) -->
+          {% if product.options.size > 0 %}
+            <div class="flex space-x-2 mt-2">
+              {% for color in product.options %}
+                <span class="color-option" style="background-color: {{ color }}"></span>
+              {% endfor %}
+            </div>
+          {% endif %}
+          
+          <!-- Добавить в корзину -->
+          <button class="add-to-cart-button bg-yellow-400 hover:bg-yellow-500 text-white py-2 px-4 rounded-full mt-4">
+            +
+          </button>
+        </div>
+      {% endfor %}
+    </div>
+    <a href="/collections/best-sellers" class="view-all-button text-gray-500 underline mt-4 block text-right">View All</a>
+  </div>
+</div>
