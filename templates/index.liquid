@@ -1,2 +1,6 @@
-{% assign collection = product.category.name.size %}
-{{collection }}
+{% for product in collections.all.products %}
+  <h2>{{ product.title }}</h2>
+  <p>{{ product.description }}</p>
+  <p>Цена: {{ product.price | money }}</p>
+{% endfor %}
+
