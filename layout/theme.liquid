@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
   <title>{{ page_title }}</title>
   <meta charset="utf-8">
@@ -8,14 +8,29 @@
   <link rel="canonical" href="{{ canonical_url }}">
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
   
+  <!-- Подключение стилей -->
   {{ content_for_header }} 
+  {{ 'application.scss.css' | asset_url | stylesheet_tag }} <!-- Это для Tailwind CSS, если вы используете precompiled SCSS -->
   
-  
+  <!-- Добавление Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
   
 </head>
-<body>
+<body class="bg-gray-100 text-gray-900">
+  <header>
+    <!-- Здесь может быть навигация или логотип -->
+  </header>
+
   <main role="main">
     {{ content_for_layout }}
   </main>
+
+  <footer>
+    <!-- Футер сайта -->
+  </footer>
+
+  <!-- Подключение скриптов -->
+  {{ 'application.js' | asset_url | script_tag }}
+  {{ content_for_footer }}
 </body>
 </html>
