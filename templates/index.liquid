@@ -1,45 +1,58 @@
-<div class="products-container">
-  {% for product in collections.all.products %}
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="container mx-auto py-8">
+  <h1 class="text-4xl font-bold mb-6">Best Sellers</h1>
+
+  <!-- Сетка для продуктов -->
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+    {% for product in collections.all.products %}
+    <div class="border p-4 rounded-lg shadow hover:shadow-lg transition-shadow">
+
+      <!-- Изображение продукта -->
       <div class="product-image">
         {% if product.featured_image %}
-          <img src="{{ product.featured_image | image_url: width: 300, height: 300 }}" alt="{{ product.title }}">
+          <img class="w-full h-auto" src="{{ product.featured_image | image_url: width: 300, height: 300 }}" alt="{{ product.title }}">
         {% else %}
           <p>Нет изображения</p>
         {% endif %}
       </div>
 
-      <div class="product-info">
-        <h2>{{ product.title }}</h2>
-        <p>Цена: {{ product.price | money }}</p>
-        <p>{{ product.description }}</p>
+      <!-- Информация о продукте -->
+      <div class="product-info mt-4">
+        <h2 class="text-xl font-semibold">{{ product.title }}</h2>
+        <p class="text-gray-600 mt-2">{{ product.price | money }}</p>
+        <p class="text-sm text-gray-500">{{ product.description | truncate: 50 }}</p>
       </div>
 
-      <div class="product-variants">
-        <h3>Варианты:</h3>
-        <ul>
+      <!-- Варианты продукта (например, цвета) -->
+      <div class="product-variants mt-4">
+        <h3 class="font-semibold">Варианты:</h3>
+        <ul class="flex space-x-2 mt-2">
           {% for variant in product.variants %}
-            <li>
-              <span> {{ variant.sku }}</span>
-              {% if variant.image %}
-                <img src="{{ variant.image | image_url: width: 50, height: 50 }}" alt="{{ variant.title }}" width="50" height="50">
-              {% endif %}
-            </li>
+          <li class="relative">
+            <!-- Изображение варианта -->
+            {% if variant.image %}
+            <img class="w-10 h-10 rounded-full border" src="{{ variant.image | image_url: width: 50, height: 50 }}" alt="{{ variant.title }}">
+            {% else %}
+            <div class="w-10 h-10 rounded-full bg-gray-300"></div>
+            {% endif %}
+            <!-- SKU Варианта -->
+            <span class="text-xs block mt-1 text-center">{{ variant.sku }}</span>
+          </li>
           {% endfor %}
         </ul>
-        <button> + </button
+      </div>
+
+      <!-- Кнопка добавления в корзину -->
+      <div class="mt-6">
+        <button class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 transition-colors w-full">
+          Добавить в корзину
+        </button>
       </div>
     </div>
-  {% endfor %}
-</div>
-<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-  {% for product in collections.all.products %}
-    <div class="border p-4 rounded-lg shadow hover:shadow-lg transition-shadow">
-      <img src="{{ product.featured_image | image_url: width: 300, height: 300 }}" alt="{{ product.title }}">
-      <h2 class="text-xl font-semibold mt-4">{{ product.title }}</h2>
-      <p class="text-gray-600">{{ product.description }}</p>
-      <p class="text-green-500 font-bold">{{ product.price | money }}</p>
-    </div>
-  {% endfor %}
-</div>
+    {% endfor %}
+  </div>
 
+  <!-- Кнопка для перехода ко всем товарам -->
+  <div class="text-center mt-8">
+    <a href="/collections/all" class="text-orange-500 text-lg font-semibold hover:underline">View All</a>
+  </div>
+</div>
