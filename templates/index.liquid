@@ -2,10 +2,16 @@
   <h2>{{ product.title }}</h2>
   <p>{{ product.description }}</p>
   <p>Цена: {{ product.price | money }}</p>
-  <p>Цена: {{ product.variants  }}</p>
-{% endfor %}
 
-{% for product in collections.all.products %}
-  <h2>{{ product.title }}</h2>
-  <pre>{{ product | json }}</pre>
+  <h3>Варианты:</h3>
+  <ul>
+    {% for variant in product.variants %}
+      <li>
+        <strong>Название варианта:</strong> {{ variant.title }}<br>
+        <strong>Цена:</strong> {{ variant.price | money }}<br>
+        <strong>SKU:</strong> {{ variant.sku }}
+      </li>
+    {% endfor %}
+  </ul>
+
 {% endfor %}
