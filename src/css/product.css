@@ -1,0 +1,52 @@
+#productMainSliderThumbs.swiper-initialized  .swiper-slide img {
+	border: 2px solid transparent;
+	transition: all 0.2s ease;
+}
+
+#productMainSliderThumbs.swiper-initialized .swiper-slide-thumb-active img {
+	border: 2px solid #B03F27;
+}
+
+.productMainSlider-swiper-pagination .swiper-pagination-bullet {
+	width: 8px;
+	height: 8px;
+	border: 1px solid #6F2B1C;
+	background-color: transparent;
+	opacity: 1;
+}
+
+.productMainSlider-swiper-pagination .swiper-pagination-bullet-active {
+	background-color: #6F2B1C;
+	opacity: 1;
+}
+
+.productMainSlider-swiper-button-next.swiper-button-disabled,
+.productMainSlider-swiper-button-prev.swiper-button-disabled {
+	display: none;
+}
+
+.productMainSlider-swiper-button-next::after,
+.productMainSlider-swiper-button-prev::after {
+	color: #ffffff;
+	font-size: 20px;
+}
+
+.jolly-variant-input[disabled] + .jolly-variant-label {
+	opacity: 0.5;
+}
+
+.jolly-variant-input:checked + .jolly-variant-label .jolly-variant-image-icon {
+	border: 1px solid #141414;
+}
+
+.jdgm-prev-badge {
+	margin-top: 24px !important;
+	text-align: center;
+}
+
+@media screen and (min-width: 900px) {
+	.jdgm-prev-badge {
+		margin-top: 0 !important;
+		text-align: left;
+	}
+}

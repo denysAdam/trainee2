@@ -1,0 +1,228 @@
+/**
+ * entry file for Tailwind CSS
+ * and other style files
+ */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+
+/* @import "my-file"; */
+
+@import "tailwindcss/utilities";
+
+@import "./components/jolly-header.css";
+
+@import "swiper/css";
+@import "swiper/css/pagination";
+@import "swiper/css/navigation";
+@import "swiper/css/effect-fade";
+
+@layer base {
+  .jolly-container {
+    @apply jc-max-w-[1376px] jc-mx-auto jc-px-4 md:jc-px-6;
+  }
+
+  .jolly-container-desktop {
+    @apply md:jc-max-w-[1376px] md:jc-mx-auto md:jc-px-6;
+  }
+}
+
+ .richtext p {
+  color: black;
+ }
+  .richtext ul {
+    list-style: none; /* Remove default bullets */
+  }
+
+  .richtext ul li {
+    margin-bottom: 16px;
+    font-size: 16px;
+  }
+  
+  .richtext ul li::before {
+    content: " ";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
+    background-color: #B03F27; /* Change the color */
+    border-radius: 100%;
+    margin-right: 16px;
+    display: inline-block; /* Needed to add space between the bullet and the text */
+    width: 10px; /* Also needed for space (tweak if needed) */
+    height: 10px; /* Also needed for space (tweak if needed) */
+  }
+
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.jolly-section {
+  @apply jc-px-8 jc-py-8;
+}
+
+.jolly-section-background-color {
+  background-color: var(--jolly-section-bg-color);
+}
+
+.g-section-paddings {
+  padding-top: var(--jolly-section-padding-t-mob);
+  padding-bottom: var(--jolly-section-padding-b-mob);
+}
+
+@media screen and (min-width: 768px) {
+  .g-section-paddings {
+    padding-top: var(--jolly-section-padding-t-dskt);
+    padding-bottom: var(--jolly-section-padding-b-dskt);
+  }
+}
+
+/* Lazysizes css */
+.blur-up {
+  -webkit-filter: blur(5px);
+  filter: blur(5px);
+  transition: filter 400ms, -webkit-filter 400ms;
+}
+
+.blur-up.lazyloaded {
+  -webkit-filter: blur(0);
+  filter: blur(0);
+}
+
+.menu-link:hover img {
+  --tw-scale-x: 1.1;
+  --tw-scale-y: 1.1;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}

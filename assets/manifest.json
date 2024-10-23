@@ -1,0 +1,37 @@
+{
+  "css/main.css": {
+    "file": "main.css",
+    "isEntry": true,
+    "src": "css/main.css"
+  },
+  "css/product.css": {
+    "file": "product.css",
+    "isEntry": true,
+    "src": "css/product.css"
+  },
+  "templates/blog.js": {
+    "file": "jc-bundle-blog.js",
+    "isEntry": true,
+    "src": "templates/blog.js"
+  },
+  "templates/collection.js": {
+    "file": "jc-bundle-collection.js",
+    "isEntry": true,
+    "src": "templates/collection.js"
+  },
+  "templates/customer.js": {
+    "file": "jc-bundle-customer.js",
+    "isEntry": true,
+    "src": "templates/customer.js"
+  },
+  "templates/main.js": {
+    "file": "jc-bundle-main.js",
+    "isEntry": true,
+    "src": "templates/main.js"
+  },
+  "templates/product.js": {
+    "file": "jc-bundle-product.js",
+    "isEntry": true,
+    "src": "templates/product.js"
+  }
+}
