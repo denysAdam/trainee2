@@ -1,23 +1,35 @@
-{% for product in collections.all.products %}
-  <h2>{{ product.title }}</h2>
-  <p>{{ product.description }}</p>
-  <p>Цена: {{ product.price | money }}</p>
-
-  <h3>Варианты:</h3>
-  <ul>
-    {% for variant in product.variants %}
-      <li>
-        <strong>Название варианта:</strong> {{ variant.title }}<br>
-        <strong>Цена:</strong> {{ variant.price | money }}<br>
-        <strong>SKU:</strong> {{ variant.sku }}<br>
-        
-        {% if variant.image %}
-          <img src="{{ variant.image | image_url: width: 300, height: 300 }}" alt="{{ variant.title }}" width="300" height="300" />
+<div class="products-container">
+  {% for product in collections.all.products %}
+    <div class="product-card">
+      <div class="product-image">
+        {% if product.featured_image %}
+          <img src="{{ product.featured_image | image_url: width: 300, height: 300 }}" alt="{{ product.title }}">
         {% else %}
-          <p>Изображение не доступно для этого варианта</p>
+          <p>Нет изображения</p>
         {% endif %}
-      </li>
-    {% endfor %}
-  </ul>
+      </div>
 
-{% endfor %}
+      <div class="product-info">
+        <h2>{{ product.title }}</h2>
+        <p>Цена: {{ product.price | money }}</p>
+        <p>{{ product.description }}</p>
+      </div>
+
+      <div class="product-variants">
+        <h3>Варианты:</h3>
+        <ul>
+          {% for variant in product.variants %}
+            <li>
+              <strong>{{ variant.title }}</strong><br>
+              <span>Цена: {{ variant.price | money }}</span><br>
+              <span>SKU: {{ variant.sku }}</span>
+              {% if variant.image %}
+                <img src="{{ variant.image | image_url: width: 50, height: 50 }}" alt="{{ variant.title }}" width="50" height="50">
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  {% endfor %}
+</div>
