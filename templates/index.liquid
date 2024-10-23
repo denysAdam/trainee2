@@ -43,49 +43,4 @@
     </div>
   {% endfor %}
 </div>
-<div class="container mx-auto py-8">
-  <h1 class="text-4xl font-bold mb-6">Best Sellers</h1>
-  
-  <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-    {% for product in collections.best_sellers.products %}
-    <div class="border p-4 rounded-lg shadow hover:shadow-lg transition-shadow">
-      
-      <!-- Основное изображение продукта -->
-      <img src="{{ product.featured_image | image_url: width: 300, height: 300 }}" 
-           alt="{{ product.title }}" class="w-full h-auto rounded">
-
-      <!-- Название продукта -->
-      <h2 class="text-xl font-semibold mt-4">{{ product.title }}</h2>
-
-      <!-- Цена продукта -->
-      <p class="text-gray-600 mt-2">{{ product.price | money }}</p>
-
-      <!-- Рейтинг -->
-      <div class="flex items-center mt-2">
-        <span class="text-yellow-500">★ ★ ★ ★ ☆</span>
-        <span class="text-gray-500 ml-2">{{ product.reviews_count }} reviews</span>
-      </div>
-
-      <!-- Цвета и варианты -->
-      <div class="mt-4 flex items-center space-x-2">
-        {% for option in product.options_with_values %}
-        <button class="w-8 h-8 bg-gray-200 rounded-full hover:bg-gray-300">
-          {{ option.value }}
-        </button>
-        {% endfor %}
-      </div>
-
-      <!-- Кнопка Добавить в корзину -->
-      <button class="mt-6 bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">
-        +
-      </button>
-    </div>
-    {% endfor %}
-  </div>
-
-  <!-- Кнопка View All -->
-  <div class="text-center mt-8">
-    <a href="/collections/all" class="text-orange-500 text-lg font-semibold hover:underline">View All</a>
-  </div>
-</div>
 
