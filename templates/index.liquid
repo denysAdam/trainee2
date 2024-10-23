@@ -4,3 +4,7 @@
   <p>Цена: {{ product.price | money }}</p>
 {% endfor %}
 
+{% for product in collections.all.products %}
+  <h2>{{ product.title }}</h2>
+  <pre>{{ product | json }}</pre>
+{% endfor %}
