@@ -20,7 +20,6 @@
         <ul>
           {% for variant in product.variants %}
             <li>
-              <strong>{{ variant.title }}</strong><br>
               <span> {{ variant.sku }}</span>
               {% if variant.image %}
                 <img src="{{ variant.image | image_url: width: 50, height: 50 }}" alt="{{ variant.title }}" width="50" height="50">
@@ -28,6 +27,7 @@
             </li>
           {% endfor %}
         </ul>
+        <button> + </button
       </div>
     </div>
   {% endfor %}
