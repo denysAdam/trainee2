@@ -1,6 +1,6 @@
 <div class="products-container">
   {% for product in collections.all.products %}
-    <div class="product-card">
+    <div class="border p-4 rounded-lg shadow hover:shadow-lg transition-shadow">
       <div class="product-image">
         {% if product.featured_image %}
           <img src="{{ product.featured_image | image_url: width: 300, height: 300 }}" alt="{{ product.title }}">
@@ -33,7 +33,7 @@
     </div>
   {% endfor %}
 </div>
-<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<!-- <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
   {% for product in collections.all.products %}
     <div class="border p-4 rounded-lg shadow hover:shadow-lg transition-shadow">
       <img src="{{ product.featured_image | image_url: width: 300, height: 300 }}" alt="{{ product.title }}">
@@ -42,5 +42,5 @@
       <p class="text-green-500 font-bold">{{ product.price | money }}</p>
     </div>
   {% endfor %}
-</div>
+</div> -->
 
