@@ -12,7 +12,7 @@
         <strong>SKU:</strong> {{ variant.sku }}<br>
         
         {% if variant.image %}
-          <img src="{{ variant.image | image_url: width: 300, height: 300 }}" alt="{{ variant.title }}" />
+          <img src="{{ variant.image | image_url: width: 300, height: 300 }}" alt="{{ variant.title }}" width="300" height="300" />
         {% else %}
           <p>Изображение не доступно для этого варианта</p>
         {% endif %}
