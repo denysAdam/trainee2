@@ -9,7 +9,13 @@
       <li>
         <strong>Название варианта:</strong> {{ variant.title }}<br>
         <strong>Цена:</strong> {{ variant.price | money }}<br>
-        <strong>SKU:</strong> {{ variant.sku }}
+        <strong>SKU:</strong> {{ variant.sku }}<br>
+        
+        {% if variant.image %}
+          {{ product | image_url: width: 450 }}
+        {% else %}
+          <p>Изображение не доступно для этого варианта</p>
+        {% endif %}
       </li>
     {% endfor %}
   </ul>
