@@ -8,38 +8,33 @@
       <div class="ml-6">
         <h2 id="modal-product-title" class="text-2xl font-bold"></h2>
         <p id="modal-product-price" class="text-gray-700 text-lg font-bold mt-2"></p>
-        <button id="modal-add-to-cart" onclick="closeModal()" class="mt-6 w-full bg-[#CB8A3D] text-white py-2 rounded-lg font-bold">Add to Cart</button>
+        <button onclick="closeModal()" class="mt-6 w-full bg-[#CB8A3D] text-white py-2 rounded-lg font-bold">Add to Cart</button>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-  function openModal(productId, productTitle, productImageSrc, productPrice) {
-    const modal = document.getElementById('productModal');
-    
-    if (modal) {
-      // Обновляем информацию в модальном окне
-      const modalImage = document.getElementById('modal-product-image');
-      const modalTitle = document.getElementById('modal-product-title');
-      const modalPrice = document.getElementById('modal-product-price');
-      const modalAddToCartButton = document.getElementById('modal-add-to-cart');
-      
-      modalImage.src = productImageSrc;
-      modalTitle.textContent = productTitle;
-      modalPrice.textContent = productPrice;
-      
-      // Добавляем цену к кнопке "Add to Cart"
-      modalAddToCartButton.textContent = `Add to Cart for ${productPrice}`;
-      
-      // Открываем модальное окно
-      modal.classList.remove('hidden');
-    } else {
-      console.error("Модальное окно не найдено на странице.");
-    }
-  }
+   function openModal(productId, productTitle, productImageSrc, productPrice) {
+        const modal = document.getElementById('productModal');
+        
+        if (modal) {
+            const modalImage = document.getElementById('modal-product-image');
+            const modalTitle = document.getElementById('modal-product-title');
+            const modalPrice = document.getElementById('modal-product-price');
 
+            modalImage.src = productImageSrc;
+            modalTitle.textContent = productTitle;
+            modalPrice.textContent = productPrice;
+
+
+            modal.classList.remove('hidden');
+        } else {
+            console.error("Модальное окно не найдено на странице.");
+        }
+    }
   function closeModal() {
     document.getElementById('productModal').classList.add('hidden');
   }
 </script>
+
