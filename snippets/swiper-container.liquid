@@ -51,11 +51,7 @@
           </div>
         </div>
       </div>
-       <ul>
-  {% for variant in product.variants %}
-    <li>{{ variant.title }} - {{ variant.price | money }}</li>
-  {% endfor %}
-</ul>
+        <h2 class="text-xl text-center font-semibold">{{ product | json }}</h2>
       {% endfor %}
     </div>
     <div class="swiper-pagination pb-6"></div>
