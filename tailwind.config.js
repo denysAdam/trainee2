@@ -101,8 +101,10 @@ module.exports = {
       transparent: "rgba(0,0,0,0)",
       apricon: "#F7C7B7",
       buttonAdd: '#CB8A3D',
-      "vampireBlack": "#000"
-    }
+      "vampireBlack": "#000",
+      
+    },
+    
   },
   plugins: [],
 };
