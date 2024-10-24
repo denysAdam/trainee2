@@ -62,8 +62,7 @@
           <div class="flex space-x-2 justify-center">
             {% for variant in product.variants %}
             <label class="variant-label cursor-pointer">
-              <!-- Добавляем атрибут для изменения состояния checked -->
-              <input type="radio" name="product_{{ product.id }}_variant" class="hidden variant-radio" data-variant-id="{{ variant.id }}" onclick="selectVariant({{ variant.id }})" />
+              <input type="radio" name="product_{{ product.id }}_variant" class="hidden variant-radio" data-variant-id="{{ variant.id }}" onclick="selectVariant(this)" />
               <span class="h-6 w-6 inline-block rounded-full border border-gray-200" style="background-color: {{ variant.option1 }}" title="{{ variant.title }}"></span>
             </label>
             {% endfor %}
@@ -77,7 +76,7 @@
     <div class="swiper-pagination pb-6"></div>
   </div>
 
- <script>
+  <script>
     function selectVariant(radioBtn) {
       // Убираем обводку со всех кружков (убираем active-class)
       const siblings = radioBtn.closest('.product-variants').querySelectorAll('.variant-label span');
@@ -91,7 +90,7 @@
 
     var swiper = new Swiper('.swiper-container', {
       slidesPerView: 4,
-      spaceBetween: 35,
+      spaceBetween: 50,
       pagination: {
         el: '.swiper-pagination',
         clickable: true,
