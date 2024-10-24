@@ -7,11 +7,11 @@
 </div>
 
 <!-- Контейнер для слайдера -->
-<div class="swiper-container mx-auto px-6" style="max-width: 1200px;">
+<div class="swiper-container px-6">
   <!-- Слайдер (продукты) -->
   <div class="swiper-wrapper">
     {% for product in collections.all.products %}
-    <div class="swiper-slide p-4" style="max-width: 300px;"> <!-- Ограничиваем максимальную ширину слайда -->
+    <div class="swiper-slide p-4 ">
       <!-- Изображение продукта -->
       <div class="product-image mb-4">
         {% if product.featured_image %}
@@ -38,7 +38,7 @@
                 </svg>
               {% else %}
                 <svg class="w-4 h-4 text-gray-300 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                  <path d="M10 15l-5.878 3.09 1.123-6.545-4.762-4.635 6.582-.957L10 .458л 2.935 5.495 6.582.957-4.762 4.635 1.123 6.545z"/>
+                  <path d="M10 15l-5.878 3.09 1.123-6.545-4.762-4.635 6.582-.957L10 .458l2.935 5.495 6.582.957-4.762 4.635 1.123 6.545z"/>
                 </svg>
               {% endif %}
             {% endfor %}
@@ -74,13 +74,14 @@
 <!-- Инициализация Swiper.js -->
 <script>
   var swiper = new Swiper('.swiper-container', {
-    slidesPerView: 4,  // Отображаем 4 слайда
+    slidesPerView: 4,
     spaceBetween: 30,
     pagination: {
       el: '.swiper-pagination',
       clickable: true,
     },
-    loop: true,
+    
+    loop: true,  
     breakpoints: {
       640: {
         slidesPerView: 1,  // 1 слайд для маленьких экранов
@@ -101,4 +102,3 @@
     }
   });
 </script>
-
