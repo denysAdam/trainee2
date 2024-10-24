@@ -13,13 +13,13 @@
     {% for product in collections.all.products %}
     <div class="swiper-slide p-4 ">
       <!-- Изображение продукта -->
-      <div class="product-image mb-4">
+      <div class="product-image mb-4 flex">
         {% if product.featured_image %}
           <img class="w-auto h-auto" src="{{ product.featured_image | image_url: width: 300, height: 300 }}" alt="{{ product.title }}">
         {% else %}
           <p>No picture yet</p>
         {% endif %}
-        <button> + </button>
+        <button > + </button>
       </div>
 
       <!-- Информация о продукте -->
