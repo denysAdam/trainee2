@@ -77,15 +77,21 @@
     <div class="swiper-pagination pb-6"></div>
   </div>
 
-  <script>
-    function selectVariant(variantId) {
-      console.log("Selected variant: ", variantId);
-      // Здесь вы можете реализовать обработку выбранного варианта
+ <script>
+    function selectVariant(radioBtn) {
+      // Убираем обводку со всех кружков (убираем active-class)
+      const siblings = radioBtn.closest('.product-variants').querySelectorAll('.variant-label span');
+      siblings.forEach(sibling => {
+        sibling.classList.remove('ring-2', 'ring-[#CB8A3D]');
+      });
+
+      // Добавляем обводку для выбранного элемента
+      radioBtn.nextElementSibling.classList.add('ring-2', 'ring-[#CB8A3D]');
     }
 
     var swiper = new Swiper('.swiper-container', {
       slidesPerView: 4,
-      spaceBetween: 50,
+      spaceBetween: 35,
       pagination: {
         el: '.swiper-pagination',
         clickable: true,
