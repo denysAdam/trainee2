@@ -25,22 +25,29 @@
     <h2 class="text-xl font-semibold">{{ product.title }}</h2>
     <p class="text-gray-600">{{ product.price | money }}</p>
 
-    <!-- Блок отзывов с рейтингом -->
-    <div class="flex items-center">
+    <!-- Блок отзывов с рейтингом и количеством отзывов -->
+    <div class="flex items-center space-x-2">
         {% assign rating = product.reviews.rating | default: 0 %}
-        {% for i in (1..5) %}
-            {% if i <= rating %}
-                <svg class="w-4 h-4 text-yellow-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                    <!-- SVG path for filled star -->
-                    <path d="M10 15l-5.878 3.09 1.123-6.545-4.762-4.635 6.582-.957L10 .458l2.935 5.495 6.582.957-4.762 4.635 1.123 6.545z"/>
-                </svg>
-            {% else %}
-                <svg class="w-4 h-4 text-gray-300 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                    <!-- SVG path for empty star -->
-                    <path d="M10 15l-5.878 3.09 1.123-6.545-4.762-4.635 6.582-.957L10 .458l2.935 5.495 6.582.957-4.762 4.635 1.123 6.545z"/>
-                </svg>
-            {% endif %}
-        {% endfor %}
+        {% assign reviews_count = product.reviews.count | default: 0 %}
+        <div class="flex">
+            {% for i in (1..5) %}
+                {% if i <= rating %}
+                    <svg class="w-4 h-4 text-yellow-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M10 15l-5.878 3.09 1.123-6.545-4.762-4.635 6.582-.957L10 .458l2.935 5.495 6.582.957-4.762 4.635 1.123 6.545z"/>
+                    </svg>
+                {% else %}
+                    <svg class="w-4 h-4 text-gray-300 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M10 15l-5.878 3.09 1.123-6.545-4.762-4.635 6.582-.957L10 .458l2.935 5.495 6.582.957-4.762 4.635 1.123 6.545z"/>
+                    </svg>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <!-- Отображение количества отзывов -->
+        {% if reviews_count > 0 %}
+            <span class="text-xs text-gray-500">({{ reviews_count }} reviews)</span>
+        {% else %}
+            <span class="text-xs text-gray-500">(No reviews)</span>
+        {% endif %}
     </div>
 
     <p class="text-sm text-gray-500">{{ product.description | truncatewords: 15 }}</p>
