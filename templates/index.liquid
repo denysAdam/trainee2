@@ -6,6 +6,7 @@
     <a href="/collections/all" class="text-black-700 py-2 px-6 text-lg font-semibold border-2 border-black rounded-full">View All</a>
   </div>
 </div>
+
 <!-- Контейнер для слайдера -->
 <div class="swiper-container my-10">
   <!-- Слайдер (продукты) -->
@@ -15,9 +16,7 @@
       <!-- Изображение продукта -->
       <div class="product-image mb-4">
         {% if product.featured_image %}
-          <img class="swiper-lazy w-full h-auto" data-src="{{ product.featured_image | image_url: width: 300, height: 300 }}" alt="{{ product.title }}">
-          <!-- Preloader для lazy loading -->
-          <div class="swiper-lazy-preloader"></div>
+          <img class="w-full h-auto" src="{{ product.featured_image | image_url: width: 300, height: 300 }}" alt="{{ product.title }}">
         {% else %}
           <p>Нет изображения</p>
         {% endif %}
@@ -72,6 +71,10 @@
     {% endfor %}
   </div>
 
+  <!-- Навигационные кнопки -->
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+
   <!-- Пагинация -->
   <div class="swiper-pagination"></div>
 </div>
@@ -86,13 +89,9 @@
       clickable: true,
     },
     navigation: {
-      nextEl: null,  // Отключаем стрелки
-      prevEl: null,  // Отключаем стрелки
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
     },
-    loop: true,
-    lazy: {
-      loadOnTransitionStart: true,  // Загружаем изображения при переходе
-      loadPrevNext: true,  // Загружаем также предыдущий и следующий слайды
-    },
+    loop: true,  // Циклическая прокрутка
   });
 </script>
