@@ -3,7 +3,7 @@
         {% for product in collections.all.products %}
         <div class="swiper-slide p-4">
             <div class="product-image mb-4 relative">
-                <!-- Передаем данные продукта (ID, название, изображение и цена) в openModal -->
+                
                 <img id="product-image-{{ product.id }}" onclick="openModal('{{ product.id }}', '{{ product.title }}', '{{ product.featured_image | image_url: width: 300, height: 300 }}', '{{ product.price | money }}')" class="w-auto h-auto" src="{{ product.featured_image | image_url: width: 300, height: 300 }}" alt="{{ product.title }}">
                 <button onclick="openModal('{{ product.id }}', '{{ product.title }}', '{{ product.featured_image | image_url: width: 300, height: 300 }}', '{{ product.price | money }}')" class="bg-[#CB8A3D] font-bold text-white rounded-full w-12 h-12 flex items-center justify-center absolute bottom-2 -right-6">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
@@ -73,7 +73,6 @@
         const modal = document.getElementById('productModal');
         
         if (modal) {
-            // Заполнение модального окна данными продукта
             const modalImage = document.getElementById('modal-product-image');
             const modalTitle = document.getElementById('modal-product-title');
             const modalPrice = document.getElementById('modal-product-price');
@@ -82,14 +81,14 @@
             modalTitle.textContent = productTitle;
             modalPrice.textContent = productPrice;
 
-            // Открытие модального окна
+
             modal.classList.remove('hidden');
         } else {
             console.error("Модальное окно не найдено на странице.");
         }
     }
 
-    // Функция для закрытия модального окна
+
     function closeModal() {
         const modal = document.getElementById('productModal');
         if (modal) {
