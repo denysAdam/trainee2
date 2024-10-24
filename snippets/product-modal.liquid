@@ -48,7 +48,8 @@
     </div>
   </div>
 </div>
-<script src="/assets/modal-logic.js" defer></script>
+<script src="{{ 'modal-logic.js' | asset_url }}" defer></script>
+
 
 <script>
   const productCollection = {{ collections.all.products | json }};
