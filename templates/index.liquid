@@ -1,7 +1,7 @@
 <div class="container mx-auto py-8">
   <div class="flex justify-between items-center py-8 px-12">
   <h1 class="text-4xl font-bold">Best Sellers</h1>
-  <!-- Кнопка для перехода ко всем товарам -->
+  <!-- button to all products -->
   <div>
     <a href="/collections/all" class="text-black-700 py-2 px-6 text-lg font-semibold border-2 border-black rounded-full">View All</a>
   </div>
@@ -24,6 +24,7 @@
       <div class="product-info">
         <h2 class="text-xl font-semibold">{{ product.title }}</h2>
         <p class="text-gray-600">{{ product.price | money }}</p>
+        <p class="text-gray-600">{{ product.reviews }}</p>
         <p class="text-sm text-gray-500">{{ product.description | truncatewords: 15 }}</p>
       </div>
 
