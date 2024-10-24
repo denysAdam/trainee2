@@ -1,4 +1,4 @@
-<!-- Модальное окно (по умолчанию скрыто) -->
+
 <div id="productModal" class="fixed z-100 inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
   <div class="bg-white bg-opacity-100 p-6 rounded-lg max-w-lg w-full relative ">
     <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-500">&times;</button>
@@ -17,36 +17,9 @@
 </div>
 
 <script>
-  // Функция для открытия модального окна и передачи данных продукта
-  function openModal(productId, productTitle, productImageSrc, productPrice) {
-    const modal = document.getElementById('productModal');
-    
-    if (modal) {
-      // Заполнение модального окна данными продукта
-      const modalImage = document.getElementById('modal-product-image');
-      const modalTitle = document.getElementById('modal-product-title');
-      const modalPrice = document.getElementById('modal-product-price');
-
-      modalImage.src = productImageSrc;
-      modalTitle.textContent = productTitle;
-      modalPrice.textContent = productPrice;
-
-      // Открытие модального окна
-      modal.classList.remove('hidden');
-    } else {
-      console.error("Модальное окно не найдено на странице.");
-    }
-  }
-
-  // Функция для закрытия модального окна
+  
   function closeModal() {
     document.getElementById('productModal').classList.add('hidden');
   }
 </script>
 
-<!-- Пример вызова openModal -->
-<!-- Вставляйте этот вызов в карточки товаров, например, как на изображении -->
-<!-- Пример карточки товара -->
-<button onclick="openModal('1', 'Product Title', 'product-image-url.jpg', '$99.99')">
-  Открыть модальное окно
-</button>
