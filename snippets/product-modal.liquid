@@ -1,0 +1,108 @@
+<div id="productModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
+  <div class="bg-white p-6 rounded-lg max-w-5xl w-3/4 relative">
+
+    <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-500 text-4xl font-bold">&times;</button>
+
+    <div class="flex">
+
+      <div class="product-image mb-4 relative w-1/2">
+        <img id="modal-product-image" class="w-full h-full object-cover rounded-lg" src="" alt="">
+      </div>
+
+      <div class="ml-6 w-1/2">
+        <h2 id="modal-product-title" class="text-3xl font-bold"></h2>
+        {% if section.settings.show_reviews %}
+          <div id="modal-product-reviews" class="flex items-center justify-center space-x-2">
+              {% assign rating = product.reviews.rating | default: 0 %}
+              {% assign reviews_count = product.reviews.count | default: 0 %}
+              <div class="flex">
+                  {% for i in (1..5) %}
+                  {% if i <= rating %}
+                  <svg class="w-4 h-4 text-yellow-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                      <path d="M10 15l-5.878 3.09 1.123-6.545-4.762-4.635 6.582-.957L10 .458l2.935 5.495 6.582.957-4.762 4.635 1.123 6.545z" />
+                  </svg>
+                  {% else %}
+                  <svg class="w-4 h-4 text-gray-300 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                      <path d="M10 15l-5.878 3.09 1.123-6.545-4.762-4.635 6.582-.957L10 .458l2.935 5.495 6.582.957-4.762 4.635 1.123 6.545z" />
+                  </svg>
+                  {% endif %}
+                  {% endfor %}
+              </div>
+              {% if reviews_count > 0 %}
+              <span class="text-xs text-gray-500">({{ reviews_count }} reviews)</span>
+              {% else %}
+              <span class="text-xs text-gray-500">(No reviews)</span>
+              {% endif %}
+          </div>
+          {% endif %}
+        <p id="modal-product-price" class="text-gray-700 text-2xl font-bold mt-2"></p>
+        <button id="modal-product-button" onclick="closeModal()" class="mt-6 w-full bg-[#CB8A3D] text-white py-4 rounded-lg font-bold text-lg"></button>
+
+        
+        <div id="modal-product-variants" class="product-variants mt-4">
+          <div class="flex space-x-2 justify-center">
+              {% for variant in product.variants %}
+              <label class="variant-label cursor-pointer">
+                  <input type="radio" name="product_{{ product.id }}_variant" class="hidden variant-radio" data-variant-id="{{ variant.id }}" data-image-url="{% if variant.image %}{{ variant.image | image_url: width: 300, height: 300 }}{% else %}{{ product.featured_image | image_url: width: 300, height: 300 }}{% endif %}" onclick="selectVariant(this, {{ product.id }})" />
+                  <span class="h-6 w-6 inline-block rounded-full border border-gray-200" style="background-color: {{ variant.option1 }}" title="{{ variant.title }}"></span>
+              </label>
+              {% endfor %}
+          </div>
+      </div>
+        <p id="modal-product-date" class="text-gray-700 text-lg font-bold mt-2"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+   function openModal(productId, productTitle, productImageSrc, productPrice) {
+        const modal = document.getElementById('productModal');
+        
+        if (modal) {
+            // Установка основных данных в модальное окно
+            const modalImage = document.getElementById('modal-product-image');
+            const modalTitle = document.getElementById('modal-product-title');
+            const modalPrice = document.getElementById('modal-product-price');
+            const modalButton = document.getElementById('modal-product-button');
+            const modalReviews = document.getElementById('modal-product-button');
+            const modalVariants = document.getElementById('modal-product-variants');
+            
+            modalImage.src = productImageSrc;
+            modalTitle.textContent = productTitle;
+            modalPrice.textContent = productPrice;
+            modalButton.textContent = productPrice + ' - ADD TO CART';
+
+            // Получение и установка даты доставки
+            getFullDate();
+
+            // Показать модальное окно
+            modal.classList.remove('hidden');
+        } 
+    }
+
+  function closeModal() {
+    document.getElementById('productModal').classList.add('hidden');
+  }
+
+  // Функция для вычисления даты доставки
+  function getFullDate() {
+    let data = new Date();
+    data.setDate(data.getDate() + 2); // Добавляем 2 дня к текущей дате
+
+    const modalData = document.getElementById('modal-product-date');  
+    let dayOfWeek = data.getDay();  
+    let dayOfMonth = data.getDate();  
+    let month = data.getMonth();  
+
+    // Названия дней недели и месяцев
+    let dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    let monthNames = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+
+    // Отображение даты в модальном окне
+    modalData.innerHTML = `Order now to receive as soon as <span style="color: black;">${dayNames[dayOfWeek]} ${dayOfMonth} ${monthNames[month]}</span>`;
+  }
+</script>

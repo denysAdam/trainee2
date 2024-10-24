@@ -100,6 +100,7 @@ module.exports = {
       Lotion: "#FFFCF8",
       transparent: "rgba(0,0,0,0)",
       apricon: "#F7C7B7",
+      buttonAdd: '#CB8A3D',
       "vampireBlack": "#000"
     }
   },
