@@ -4,12 +4,30 @@
         <div class="swiper-slide p-4">
             <div class="product-image mb-4 relative">
                 
-                <img id="product-image-{{ product.id }}" width="350" height="350"onclick="openModal('{{ product.id }}', '{{ product.title }}', '{{ product.featured_image | image_url: width: 350, height: 350 }}', '{{ product.price | money }}')" class="w-96 h-a" src="{{ product.featured_image | image_url: width: 300, height: 300 }}" alt="{{ product.title }}">
-                <button onclick="openModal('{{ product.id }}', '{{ product.title }}', '{{ product.featured_image | image_url: width: 300, height: 300 }}', '{{ product.price | money }}')" class="bg-[#CB8A3D] font-bold text-white rounded-full w-12 h-12 flex items-center justify-center absolute bottom-2 right-4">
+                {% assign has_image_variant = false %}
+                {% for variant in product.variants %}
+                {% if variant.image != null %}
+                {% assign has_image_variant = true %}
+                {% endif %}
+                {% endfor %}
+                
+                <img id="product-image-{{ product.id }}" width="350" height="350" 
+                    {% if has_image_variant %}
+                        onclick="openModal('{{ product.id }}', '{{ product.title }}', '{{ product.featured_image | image_url: width: 350, height: 350 }}', '{{ product.price | money }}')"
+                    {% endif %}
+                    class="w-96 h-a" src="{{ product.featured_image | image_url: width: 300, height: 300 }}" alt="{{ product.title }}">
+
+                
+                <button 
+                    {% if has_image_variant %}
+                        onclick="openModal('{{ product.id }}', '{{ product.title }}', '{{ product.featured_image | image_url: width: 300, height: 300 }}', '{{ product.price | money }}')" 
+                    {% endif %}
+                    class="bg-[#CB8A3D] font-bold text-white rounded-full w-12 h-12 flex items-center justify-center absolute bottom-2 right-4">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                     </svg>
                 </button>
+                
             </div>
 
             <div class="product-info">
@@ -44,18 +62,22 @@
             <div class="product-variants mt-4">
                 <div class="flex space-x-2 justify-center">
                     {% for variant in product.variants %}
+                    {% if variant.image != null %}
                     <label class="variant-label cursor-pointer">
-                        <input type="radio" name="product_{{ product.id }}_variant" class="hidden variant-radio"  data-variant-id="{{ variant.id }}" data-image-url="{% if variant.image %}{{ variant.image | image_url: width: 300, height: 300 }}{% else %}{{ product.featured_image | image_url: width: 300, height: 300 }}{% endif %}" onclick="selectVariant(this, {{ product.id }})" />
+                        <input type="radio" name="product_{{ product.id }}_variant" class="hidden variant-radio" data-variant-id="{{ variant.id }}" data-image-url="{% if variant.image %}{{ variant.image | image_url: width: 300, height: 300 }}{% else %}{{ product.featured_image | image_url: width: 300, height: 300 }}{% endif %}" onclick="selectVariant(this, {{ product.id }})" />
                         <span class="h-6 w-6 inline-block rounded-full border border-gray-200" style="background-color: {{ variant.option1 }}" title="{{ variant.title }}"></span>
                     </label>
+                    {% endif %}
                     {% endfor %}
                 </div>
             </div>
+            
         </div>
         {% endfor %}
     </div>
     <div class="swiper-pagination pb-6"></div>
 </div>
+
 {% render 'product-modal' %}
 
 <script>
@@ -69,8 +91,7 @@
         productImage.src = radioBtn.dataset.imageUrl;
     }
 
-
-    var swiper = new Swiper('.swiper-container', {
+    const swiper = new Swiper('.swiper-container', {
         slidesPerView: {{ section.settings.slides_per_view }},
         spaceBetween: 50,
         pagination: {
