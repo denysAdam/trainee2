@@ -1,4 +1,4 @@
-// modal-logic.js
+// Modal logic
 
 function openModal(productId, productTitle, productImageSrc, productPrice) {
     const modal = document.getElementById('productModal');
@@ -25,20 +25,9 @@ function openModal(productId, productTitle, productImageSrc, productPrice) {
         console.log('Product add to cart ');
     }
 }
+// Modal logic
 
-function selectVariantModal(radioBtn) {
-    const siblings = radioBtn.closest('.product-variants').querySelectorAll('.variant-label span');
-    
-    siblings.forEach(sibling => {
-        sibling.classList.remove('ring-2', 'ring-[#CB8A3D]');
-    });
-    radioBtn.nextElementSibling.classList.add('ring-2', 'ring-black');
-
-    const modalImage = document.getElementById('modal-product-image');
-    
-    modalImage.src = radioBtn.dataset.imageUrl;
-}
-
+// Slider logic
 let slideCounter = 1; 
 
 function createSliderProducts(url) {
@@ -58,23 +47,46 @@ function clearSliderProducts() {
     `;
     swiper2.appendSlide(newSlide);
 }
+// Slider logic
 
+// Radio button logic
+function selectVariantModal(radioBtn) {
+    
+    const siblings = radioBtn.closest('.product-variants').querySelectorAll('.variant-label span');
+    siblings.forEach(sibling => {
+        sibling.classList.remove('ring-2', 'ring-[#CB8A3D]');
+    });
+    
+    radioBtn.nextElementSibling.classList.add('ring-2', 'ring-black');
 
+    const slideIndex = radioBtn.dataset.slideIndex;
 
+    if (slideIndex !== undefined && swiper2) {
+        swiper2.slideTo(slideIndex);
+    }
+}
 function createVariants(variants, productId, modalVariants, defaultImage) { 
     let variantsHTML = '';
+    let slideIndex = 1; 
+
     variants.forEach(variant => {
         const variantImageUrl = variant.featured_image ? variant.featured_image.src : defaultImage;
         createSliderProducts(variantImageUrl);
+
         variantsHTML += `
             <label class="variant-label cursor-pointer">
-                <input type="radio" name="product_${productId}_variant" class="hidden variant-radio" data-variant-id="${variant.id}" data-image-url="${variantImageUrl}" onclick="selectVariantModal(this)" />
+                <input type="radio" name="product_${productId}_variant" class="hidden variant-radio" data-slide-index="${slideIndex}" data-variant-id="${variant.id}" onclick="selectVariantModal(this)" />
                 <span class="h-6 w-6 inline-block rounded-full border border-gray-200" style="background-color: ${variant.option1}" title="${variant.title}"></span>
             </label>`;
+        
+        slideIndex++; 
     });
-    modalVariants.innerHTML = variantsHTML;
-}
 
+    modalVariants.innerHTML = variantsHTML;  
+}
+// Radio button logic
+
+// Date logic
 function getFullDate() {
     let data = new Date();
     data.setDate(data.getDate() + 2); 
@@ -92,7 +104,9 @@ function getFullDate() {
 
     modalData.innerHTML = `Order now to receive as soon as <span style="color: black;">${dayNames[dayOfWeek]} ${dayOfMonth} ${monthNames[month]}</span>`;
 }
+// Date logic
 
+// Modal logic
 function closeModal(boolean) {
     clearSliderProducts();
     document.getElementById('productModal').classList.add('hidden');
