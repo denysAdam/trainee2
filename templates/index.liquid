@@ -15,7 +15,7 @@
       <!-- Изображение продукта -->
       <div class="product-image mb-4">
         {% if product.featured_image %}
-          <img class="w-100 h-250" src="{{ product.featured_image | image_url: width: 300, height: 300 }}" alt="{{ product.title }}">
+          <img class="w-52 h-50" src="{{ product.featured_image | image_url: width: 300, height: 300 }}" alt="{{ product.title }}">
         {% else %}
           <p>Нет изображения</p>
         {% endif %}
