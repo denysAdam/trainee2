@@ -54,8 +54,7 @@
 
       <!-- Варианты продукта -->
       <div class="product-variants mt-4">
-        <h3 class="font-semibold">Colors:</h3>
-        <div class="flex space-x-2">
+        <div class="flex space-x-2 justify-center">
           {% for variant in product.variants %}
           <label class="variant-label">
             <input type="radio" name="product_{{ product.id }}_variant" class="hidden" />
