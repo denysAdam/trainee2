@@ -8,55 +8,43 @@
       <div class="ml-6">
         <h2 id="modal-product-title" class="text-2xl font-bold"></h2>
         <p id="modal-product-price" class="text-gray-700 text-lg font-bold mt-2"></p>
-
-        <!-- Варианты продукта -->
-        <div id="modal-product-variants" class="product-variants mt-4">
-          <!-- Варианты будут заполнены динамически через JS -->
-        </div>
-
         <button onclick="closeModal()" class="mt-6 w-full bg-[#CB8A3D] text-white py-2 rounded-lg font-bold">Add to Cart</button>
       </div>
+      <div class="product-variants mt-4">
+                <div class="flex space-x-2 justify-center">
+                    {% for variant in product.variants %}
+                    <label class="variant-label cursor-pointer">
+                        <input type="radio" name="product_{{ product.id }}_variant" class="hidden variant-radio" data-variant-id="{{ variant.id }}" data-image-url="{% if variant.image %}{{ variant.image | image_url: width: 300, height: 300 }}{% else %}{{ product.featured_image | image_url: width: 300, height: 300 }}{% endif %}" onclick="selectVariant(this, {{ product.id }})" />
+                        <span class="h-6 w-6 inline-block rounded-full border border-gray-200" style="background-color: {{ variant.option1 }}" title="{{ variant.title }}"></span>
+                    </label>
+                    {% endfor %}
+                </div>
+            </div>
     </div>
   </div>
 </div>
 
 <script>
-   function openModal(productId, productTitle, productImageSrc, productPrice, variants) {
-    const modal = document.getElementById('productModal');
-    
-    if (modal) {
-        const modalImage = document.getElementById('modal-product-image');
-        const modalTitle = document.getElementById('modal-product-title');
-        const modalPrice = document.getElementById('modal-product-price');
-        const modalVariants = document.getElementById('modal-product-variants');
+   function openModal(productId, productTitle, productImageSrc, productPrice) {
+        const modal = document.getElementById('productModal');
+        
+        if (modal) {
+            const modalImage = document.getElementById('modal-product-image');
+            const modalTitle = document.getElementById('modal-product-title');
+            const modalPrice = document.getElementById('modal-product-price');
 
-        // Заполняем данные продукта
-        modalImage.src = productImageSrc;
-        modalTitle.textContent = productTitle;
-        modalPrice.textContent = productPrice;
+            modalImage.src = productImageSrc;
+            modalTitle.textContent = productTitle;
+            modalPrice.textContent = productPrice;
 
-        // Очищаем старые варианты
-        modalVariants.innerHTML = '';
 
-        // Заполняем варианты продукта
-        variants.forEach(variant => {
-          const variantElement = document.createElement('label');
-          variantElement.classList.add('variant-label', 'cursor-pointer');
-          variantElement.innerHTML = `
-            <input type="radio" name="modal-product-variant" class="hidden variant-radio" data-variant-id="${variant.id}" />
-            <span class="h-6 w-6 inline-block rounded-full border border-gray-200" style="background-color: ${variant.option1}" title="${variant.title}"></span>
-          `;
-          modalVariants.appendChild(variantElement);
-        });
-
-        // Открытие модального окна
-        modal.classList.remove('hidden');
-    } else {
-        console.error("Модальное окно не найдено на странице.");
+            modal.classList.remove('hidden');
+        } else {
+            console.error("Модальное окно не найдено на странице.");
+        }
     }
-}
-
   function closeModal() {
     document.getElementById('productModal').classList.add('hidden');
   }
 </script>
+
