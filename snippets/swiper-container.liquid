@@ -68,6 +68,34 @@
       productImage.src = radioBtn.dataset.imageUrl;
     }
 
+  function openModal(productId, productTitle, productImageSrc, productPrice) {
+    // Проверка, чтобы убедиться, что модальное окно существует на странице
+    const modal = document.getElementById('productModal');
+    
+    if (modal) {
+        // Заполнение модального окна данными продукта
+        const modalImage = document.getElementById('modal-product-image');
+        const modalTitle = document.getElementById('modal-product-title');
+        const modalPrice = document.getElementById('modal-product-price');
+
+        modalImage.src = productImageSrc;
+        modalTitle.textContent = productTitle;
+        modalPrice.textContent = productPrice;
+
+        // Открытие модального окна
+        modal.classList.remove('hidden');
+    } else {
+        console.error("Модальное окно не найдено на странице.");
+    }
+}
+
+// Функция для закрытия модального окна
+function closeModal() {
+    const modal = document.getElementById('productModal');
+    if (modal) {
+        modal.classList.add('hidden');
+    }
+}
 
     
     var swiper = new Swiper('.swiper-container', {
