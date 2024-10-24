@@ -4,8 +4,8 @@
       {% for product in collections.all.products %}
       <div class="swiper-slide p-4">
         <div class="product-image mb-4 relative">
-          <img id="product-image-{{ product.id }}" class="w-auto h-auto" src="{{ product.featured_image | image_url: width: 300, height: 300 }}" alt="{{ product.title }}">
-          <button class="bg-[#CB8A3D] font-bold text-white rounded-full w-12 h-12 flex items-center justify-center absolute bottom-2 -right-6">
+          <img id="product-image-{{ product.id }}" onclick="openModal({{ product.id }})" class="w-auto h-auto" src="{{ product.featured_image | image_url: width: 300, height: 300 }}" alt="{{ product.title }}">
+          <button onclick="openModal({{ product.id }})" class="bg-[#CB8A3D] font-bold text-white rounded-full w-12 h-12 flex items-center justify-center absolute bottom-2 -right-6">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
             </svg>
@@ -59,20 +59,19 @@
 
   <script>
     function selectVariant(radioBtn, productId) {
-      // Убираем обводку со всех кружков (убираем active-class)
       const siblings = radioBtn.closest('.product-variants').querySelectorAll('.variant-label span');
       siblings.forEach(sibling => {
         sibling.classList.remove('ring-2', 'ring-[#CB8A3D]');
       });
-
-      // Добавляем обводку для выбранного элемента
       radioBtn.nextElementSibling.classList.add('ring-2', 'ring-black');
-
-      // Изменяем изображение продукта
       const productImage = document.getElementById('product-image-' + productId);
       productImage.src = radioBtn.dataset.imageUrl;
     }
 
+    function openModel(productId){
+        console.log(productId);
+    }
+    
     var swiper = new Swiper('.swiper-container', {
       slidesPerView: {{ section.settings.slides_per_view }},
       spaceBetween: 50,
