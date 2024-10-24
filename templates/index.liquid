@@ -22,11 +22,30 @@
 
       <!-- Информация о продукте -->
       <div class="product-info">
-        <h2 class="text-xl font-semibold">{{ product.title }}</h2>
-        <p class="text-gray-600">{{ product.price | money }}</p>
-        <p class="text-gray-600">{{ product.reviews }}</p>
-        <p class="text-sm text-gray-500">{{ product.description | truncatewords: 15 }}</p>
-      </div>
+    <h2 class="text-xl font-semibold">{{ product.title }}</h2>
+    <p class="text-gray-600">{{ product.price | money }}</p>
+
+    <!-- Блок отзывов с рейтингом -->
+    <div class="flex items-center">
+        {% assign rating = product.reviews.rating | default: 0 %}
+        {% for i in (1..5) %}
+            {% if i <= rating %}
+                <svg class="w-4 h-4 text-yellow-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <!-- SVG path for filled star -->
+                    <path d="M10 15l-5.878 3.09 1.123-6.545-4.762-4.635 6.582-.957L10 .458l2.935 5.495 6.582.957-4.762 4.635 1.123 6.545z"/>
+                </svg>
+            {% else %}
+                <svg class="w-4 h-4 text-gray-300 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <!-- SVG path for empty star -->
+                    <path d="M10 15l-5.878 3.09 1.123-6.545-4.762-4.635 6.582-.957L10 .458l2.935 5.495 6.582.957-4.762 4.635 1.123 6.545z"/>
+                </svg>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <p class="text-sm text-gray-500">{{ product.description | truncatewords: 15 }}</p>
+</div>
+
 
       <!-- Варианты продукта -->
       <div class="product-variants mt-4">
