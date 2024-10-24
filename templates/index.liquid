@@ -8,6 +8,7 @@
 </div>
 
 <!-- Контейнер для слайдера -->
+<!-- Контейнер для слайдера -->
 <div class="swiper-container my-10">
   <!-- Слайдер (продукты) -->
   <div class="swiper-wrapper">
@@ -16,7 +17,9 @@
       <!-- Изображение продукта -->
       <div class="product-image mb-4">
         {% if product.featured_image %}
-          <img class="w-full h-auto" src="{{ product.featured_image | image_url: width: 300, height: 300 }}" alt="{{ product.title }}">
+          <img class="swiper-lazy w-full h-auto" data-src="{{ product.featured_image | image_url: width: 300, height: 300 }}" alt="{{ product.title }}">
+          <!-- Preloader для lazy loading -->
+          <div class="swiper-lazy-preloader"></div>
         {% else %}
           <p>Нет изображения</p>
         {% endif %}
@@ -84,7 +87,10 @@
       el: '.swiper-pagination',
       clickable: true,
     },
-    
     loop: true,  // Циклическая прокрутка
+    lazy: {
+      loadOnTransitionStart: true,
+      loadPrevNext: true,  // Загружает также предыдущий и следующий слайд для плавности
+    },
   });
 </script>
