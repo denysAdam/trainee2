@@ -22,39 +22,39 @@
 
 <script>
    function openModal(productId, productTitle, productImageSrc, productPrice, variants) {
-        const modal = document.getElementById('productModal');
-        
-        if (modal) {
-            const modalImage = document.getElementById('modal-product-image');
-            const modalTitle = document.getElementById('modal-product-title');
-            const modalPrice = document.getElementById('modal-product-price');
-            const modalVariants = document.getElementById('modal-product-variants');
-            
-            // Заполняем информацию о продукте
-            modalImage.src = productImageSrc;
-            modalTitle.textContent = productTitle;
-            modalPrice.textContent = productPrice;
+    const modal = document.getElementById('productModal');
+    
+    if (modal) {
+        const modalImage = document.getElementById('modal-product-image');
+        const modalTitle = document.getElementById('modal-product-title');
+        const modalPrice = document.getElementById('modal-product-price');
+        const modalVariants = document.getElementById('modal-product-variants');
 
-            // Очищаем старые варианты
-            modalVariants.innerHTML = '';
+        // Заполняем данные продукта
+        modalImage.src = productImageSrc;
+        modalTitle.textContent = productTitle;
+        modalPrice.textContent = productPrice;
 
-            // Заполняем варианты продукта
-            variants.forEach(variant => {
-              const variantElement = document.createElement('label');
-              variantElement.classList.add('variant-label', 'cursor-pointer');
-              variantElement.innerHTML = `
-                <input type="radio" name="modal-product-variant" class="hidden variant-radio" data-variant-id="${variant.id}" />
-                <span class="h-6 w-6 inline-block rounded-full border border-gray-200" style="background-color: ${variant.color}" title="${variant.title}"></span>
-              `;
-              modalVariants.appendChild(variantElement);
-            });
+        // Очищаем старые варианты
+        modalVariants.innerHTML = '';
 
-            // Открытие модального окна
-            modal.classList.remove('hidden');
-        } else {
-            console.error("Модальное окно не найдено на странице.");
-        }
+        // Заполняем варианты продукта
+        variants.forEach(variant => {
+          const variantElement = document.createElement('label');
+          variantElement.classList.add('variant-label', 'cursor-pointer');
+          variantElement.innerHTML = `
+            <input type="radio" name="modal-product-variant" class="hidden variant-radio" data-variant-id="${variant.id}" />
+            <span class="h-6 w-6 inline-block rounded-full border border-gray-200" style="background-color: ${variant.option1}" title="${variant.title}"></span>
+          `;
+          modalVariants.appendChild(variantElement);
+        });
+
+        // Открытие модального окна
+        modal.classList.remove('hidden');
+    } else {
+        console.error("Модальное окно не найдено на странице.");
     }
+}
 
   function closeModal() {
     document.getElementById('productModal').classList.add('hidden');
