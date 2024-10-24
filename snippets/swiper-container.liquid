@@ -45,7 +45,7 @@
                 <div class="flex space-x-2 justify-center">
                     {% for variant in product.variants %}
                     <label class="variant-label cursor-pointer">
-                        <input type="radio" name="product_{{ product.id }}_variant" class="hidden variant-radio" data-variant-id="{{ variant.id }}" data-image-url="{% if variant.image %}{{ variant.image | image_url: width: 300, height: 300 }}{% else %}{{ product.featured_image | image_url: width: 300, height: 300 }}{% endif %}" onclick="selectVariant(this, {{ product.id }})" />
+                        <input type="radio" name="product_{{ product.id }}_variant" class="hidden variant-radio"  data-variant-id="{{ variant.id }}" data-image-url="{% if variant.image %}{{ variant.image | image_url: width: 300, height: 300 }}{% else %}{{ product.featured_image | image_url: width: 300, height: 300 }}{% endif %}" onclick="selectVariant(this, {{ product.id }})" />
                         <span class="h-6 w-6 inline-block rounded-full border border-gray-200" style="background-color: {{ variant.option1 }}" title="{{ variant.title }}"></span>
                     </label>
                     {% endfor %}

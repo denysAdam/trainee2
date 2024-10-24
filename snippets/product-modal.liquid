@@ -1,11 +1,11 @@
 <div id="productModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
   <div class="bg-white p-6 rounded-lg max-w-5xl w-3/4 relative">
 
-    <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-500 text-4xl font-bold">&times;</button>
+    <button onclick="closeModal(false)" class="absolute top-2 right-2 text-gray-500 text-4xl font-bold">&times;</button>
 
     <div class="flex">
 
-      <div class="product-image mb-4 relative w-1/2">
+      <div class="product-image mb-4 relative w-1/2 swiper-modal-container">
         <img id="modal-product-image" class="w-full h-full object-cover rounded-lg" width="" height="" alt="Photo of product">
       </div>
 
@@ -36,73 +36,31 @@
           </div>
           {% endif %}
         <p id="modal-product-price" class="text-gray-700 text-2xl font-bold mt-2"></p>
-        <button id="modal-product-button" onclick="closeModal()" class="mt-6 w-full bg-[#CB8A3D] text-white py-4 rounded-lg font-bold text-lg"></button>
+        
 
         
         <div id="modal-product-variants" class="product-variants mt-4">
-          <div class="flex space-x-2 justify-center">
-              {% for variant in product.variants %}
-              <label class="variant-label cursor-pointer">
-                  <input type="radio" name="product_{{ product.id }}_variant" class="hidden variant-radio" data-variant-id="{{ variant.id }}" data-image-url="{% if variant.image %}{{ variant.image | image_url: width: 300, height: 300 }}{% else %}{{ product.featured_image | image_url: width: 300, height: 300 }}{% endif %}" onclick="selectVariant(this, {{ product.id }})" />
-                  <span class="h-6 w-6 inline-block rounded-full border border-gray-200" style="background-color: {{ variant.option1 }}" title="{{ variant.title }}"></span>
-              </label>
-              {% endfor %}
-          </div>
-      </div>
+          
+        </div>
+      <button id="modal-product-button" onclick="closeModal(true)" class="mt-6 w-full bg-[#CB8A3D] text-white py-4 rounded-lg font-bold text-lg"></button>
         <p id="modal-product-date" class="text-gray-700 text-lg font-bold mt-2"></p>
       </div>
     </div>
   </div>
 </div>
+<script src="/assets/modal-logic.js" defer></script>
 
 <script>
-   function openModal(productId, productTitle, productImageSrc, productPrice) {
-        const modal = document.getElementById('productModal');
-        
-        if (modal) {
-            // Установка основных данных в модальное окно
-            const modalImage = document.getElementById('modal-product-image');
-            const modalTitle = document.getElementById('modal-product-title');
-            const modalPrice = document.getElementById('modal-product-price');
-            const modalButton = document.getElementById('modal-product-button');
-            const modalReviews = document.getElementById('modal-product-button');
-            const modalVariants = document.getElementById('modal-product-variants');
-            
-            modalImage.src = productImageSrc;
-            modalTitle.textContent = productTitle;
-            modalPrice.textContent = productPrice;
-            modalButton.textContent = productPrice + ' - ADD TO CART';
+  const productCollection = {{ collections.all.products | json }};
+  
 
-            // Получение и установка даты доставки
-            getFullDate();
-
-            // Показать модальное окно
-            modal.classList.remove('hidden');
-        } 
-    }
-
-  function closeModal() {
-    document.getElementById('productModal').classList.add('hidden');
-  }
-
-  // Функция для вычисления даты доставки
-  function getFullDate() {
-    let data = new Date();
-    data.setDate(data.getDate() + 2); // Добавляем 2 дня к текущей дате
-
-    const modalData = document.getElementById('modal-product-date');  
-    let dayOfWeek = data.getDay();  
-    let dayOfMonth = data.getDate();  
-    let month = data.getMonth();  
-
-    // Названия дней недели и месяцев
-    let dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    let monthNames = [
-        "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-    ];
-
-    // Отображение даты в модальном окне
-    modalData.innerHTML = `Order now to receive as soon as <span style="color: black;">${dayNames[dayOfWeek]} ${dayOfMonth} ${monthNames[month]}</span>`;
-  }
+    var swiper = new Swiper('.swiper-modal-container', {
+      slidesPerView: 1,
+      spaceBetween: 50,
+      pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+      },
+      loop: true,
+  });
 </script>
