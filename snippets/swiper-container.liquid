@@ -92,12 +92,27 @@
     }
 
     const swiper = new Swiper('.swiper-container', {
-        slidesPerView: {{ section.settings.slides_per_view }},
         spaceBetween: 50,
         pagination: {
             el: '.swiper-pagination',
             clickable: true,
         },
         loop: true,
+        breakpoints: {
+            320: {
+                slidesPerView: 1, 
+                spaceBetween: 20  
+            },
+            
+            640: {
+                slidesPerView: 2, 
+                spaceBetween: 30
+            },
+            
+            1024: {
+                slidesPerView: {{ section.settings.slides_per_view }}, 
+                spaceBetween: 40
+            }
+        }
     });
 </script>
