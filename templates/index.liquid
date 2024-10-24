@@ -7,15 +7,15 @@
 </div>
 
 <!-- Контейнер для слайдера -->
-<div class="swiper-container px-6">
+<div class="swiper-container px-6 max-w-screen-lg mx-auto">
   <!-- Слайдер (продукты) -->
   <div class="swiper-wrapper">
     {% for product in collections.all.products %}
-    <div class="swiper-slide p-4 ">
+    <div class="swiper-slide p-4 border rounded-lg shadow hover:shadow-lg transition-shadow">
       <!-- Изображение продукта -->
       <div class="product-image mb-4">
         {% if product.featured_image %}
-          <img class="w-auto h-auto" src="{{ product.featured_image | image_url: width: 300, height: 300 }}" alt="{{ product.title }}">
+          <img class="w-full h-auto" src="{{ product.featured_image | image_url: width: 300, height: 300 }}" alt="{{ product.title }}">
         {% else %}
           <p>Нет изображения</p>
         {% endif %}
@@ -34,11 +34,11 @@
             {% for i in (1..5) %}
               {% if i <= rating %}
                   <svg class="w-4 h-4 text-yellow-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                  <path d="M10 15l-5.878 3.09 1.123-6.545-4.762-4.635 6.582-.957L10 .458l2.935 5.495 6.582.957-4.762 4.635 1.123 6.545z"/>
+                  <path d="M10 15l-5.878 3.09 1.123-6.545-4.762-4.635 6.582-.957L10 .458л 2.935 5.495 6.582.957-4.762 4.635 1.123 6.545z"/>
                 </svg>
               {% else %}
                 <svg class="w-4 h-4 text-gray-300 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                  <path d="M10 15l-5.878 3.09 1.123-6.545-4.762-4.635 6.582-.957L10 .458l2.935 5.495 6.582.957-4.762 4.635 1.123 6.545z"/>
+                  <path d="M10 15l-5.878 3.09 1.123-6.545-4.762-4.635 6.582-.957L10 .458л 2.935 5.495 6.582.957-4.762 4.635 1.123 6.545z"/>
                 </svg>
               {% endif %}
             {% endfor %}
@@ -81,7 +81,24 @@
       clickable: true,
     },
     
-    loop: true,  
-    
+    loop: true,
+    centeredSlides: false,  // Отключить центрирование первого слайда
+    breakpoints: {
+      // Настройки для мобильных устройств
+      640: {
+        slidesPerView: 1,
+        spaceBetween: 10,
+      },
+      // Для планшетов
+      768: {
+        slidesPerView: 2,
+        spaceBetween: 20,
+      },
+      // Для десктопов
+      1024: {
+        slidesPerView: 4,
+        spaceBetween: 30,
+      }
+    }
   });
 </script>
