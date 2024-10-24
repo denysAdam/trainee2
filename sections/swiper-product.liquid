@@ -1,6 +1,24 @@
 {% schema %}
-  {
-    "name": "Section name",
-    "settings": []
-  }
+{
+  "name": "Swiper Product Slider",
+  "settings": [
+    {
+      "type": "number",
+      "id": "slides_per_view",
+      "label": "Number of slides",
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "show_reviews",
+      "label": "Show reviews",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Swiper Product Slider"
+    }
+  ]
+}
 {% endschema %}
