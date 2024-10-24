@@ -56,7 +56,7 @@
     <div class="swiper-pagination pb-6"></div>
                   
   </div>
-
+{% render 'product-modal' %}}
   <script>
     function selectVariant(radioBtn, productId) {
       const siblings = radioBtn.closest('.product-variants').querySelectorAll('.variant-label span');
