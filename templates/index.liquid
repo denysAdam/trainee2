@@ -1,14 +1,13 @@
 <div class="container mx-auto py-8 px-6">
   <div class="flex justify-between items-center py-8 px-12">
   <h1 class="text-4xl font-bold">Best Sellers</h1>
-  <!-- button to all products -->
   <div>
     <a href="/collections/all" class="text-black-700 py-2 px-6 text-lg font-semibold border-2 border-black rounded-full">View All</a>
   </div>
 </div>
 
 <!-- Контейнер для слайдера -->
-<div class="swiper-container my-10 px-6">
+<div class="swiper-container px-6">
   <!-- Слайдер (продукты) -->
   <div class="swiper-wrapper">
     {% for product in collections.all.products %}
