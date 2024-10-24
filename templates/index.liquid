@@ -1,6 +1,9 @@
 <div class="container mx-auto py-8">
   <h1 class="text-4xl font-bold mb-6">Best Sellers</h1>
-
+  <!-- Кнопка для перехода ко всем товарам -->
+  <div class="text-center mt-8">
+    <a href="/collections/all" class="text-orange-500 text-lg font-semibold hover:underline">View All</a>
+  </div>
   <!-- Сетка для продуктов -->
   <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
     {% for product in collections.all.products %}
@@ -51,8 +54,5 @@
     {% endfor %}
   </div>
 
-  <!-- Кнопка для перехода ко всем товарам -->
-  <div class="text-center mt-8">
-    <a href="/collections/all" class="text-orange-500 text-lg font-semibold hover:underline">View All</a>
-  </div>
+  
 </div>
