@@ -6,13 +6,11 @@
     </div>
   </div>
 
-  <!-- Контейнер для слайдера -->
+  <!-- swiper-container -->
   <div class="swiper-container px-4">
-    <!-- Слайдер (продукты) -->
     <div class="swiper-wrapper">
       {% for product in collections.all.products %}
       <div class="swiper-slide p-4">
-        <!-- Изображение продукта -->
         <div class="product-image mb-4 relative">
           <img id="product-image-{{ product.id }}" class="w-auto h-auto" src="{{ product.featured_image | image_url: width: 300, height: 300 }}" alt="{{ product.title }}">
           <button class="bg-[#CB8A3D] font-bold text-white rounded-full w-12 h-12 flex items-center justify-center absolute bottom-2 -right-6">
@@ -22,12 +20,9 @@
           </button>
         </div>
 
-        <!-- Информация о продукте -->
         <div class="product-info">
           <h2 class="text-xl text-center font-semibold">{{ product.title }}</h2>
           <p class="text-gray-700 text-center font-bold">{{ product.price | money }}</p>
-
-          <!-- Блок отзывов с рейтингом и количеством отзывов -->
           <div class="flex items-center justify-center space-x-2">
             {% assign rating = product.reviews.rating | default: 0 %}
             {% assign reviews_count = product.reviews.count | default: 0 %}
@@ -44,7 +39,6 @@
               {% endif %}
               {% endfor %}
             </div>
-            <!-- Отображение количества отзывов -->
             {% if reviews_count > 0 %}
             <span class="text-xs text-gray-500">({{ reviews_count }} reviews)</span>
             {% else %}
@@ -52,8 +46,6 @@
             {% endif %}
           </div>
         </div>
-
-        <!-- Варианты продукта -->
         <div class="product-variants mt-4">
           <div class="flex space-x-2 justify-center">
             {% for variant in product.variants %}
@@ -67,8 +59,6 @@
       </div>
       {% endfor %}
     </div>
-
-    <!-- Пагинация -->
     <div class="swiper-pagination pb-6"></div>
   </div>
 
@@ -98,4 +88,5 @@
       loop: true,
     });
   </script>
+                  {% section 'swiper-product' %}
 </div>
