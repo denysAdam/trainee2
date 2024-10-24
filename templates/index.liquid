@@ -1,18 +1,16 @@
 <div class="container mx-auto py-8">
   <h1 class="text-4xl font-bold mb-6">Best Sellers</h1>
-
   <!-- Кнопка для перехода ко всем товарам -->
-  <div class="text-center mt-8">
-    <a href="/collections/all" class="text-black hover:text-black-700 py-2 px-4 text-lg font-semibold border-2 border-gray-800 rounded-full">View All</a>
+  <div class="text-center mt-8 mb-10">
+    <a href="/collections/all" class="text-white bg-black py-2 px-4 text-lg font-semibold rounded-full">View All</a>
   </div>
 
   <!-- Сетка для продуктов -->
   <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
     {% for product in collections.all.products %}
     <div class="border p-4 rounded-lg shadow hover:shadow-lg transition-shadow">
-
       <!-- Изображение продукта -->
-      <div class="product-image">
+      <div class="product-image mb-4">
         {% if product.featured_image %}
           <img class="w-full h-auto" src="{{ product.featured_image | image_url: width: 300, height: 300 }}" alt="{{ product.title }}">
         {% else %}
@@ -21,30 +19,23 @@
       </div>
 
       <!-- Информация о продукте -->
-      <div class="product-info mt-4">
+      <div class="product-info">
         <h2 class="text-xl font-semibold">{{ product.title }}</h2>
-        <p class="text-gray-600 mt-2">{{ product.price | money }}</p>
-        <p class="text-sm text-gray-500">{{ product.description | truncate: 50 }}</p>
+        <p class="text-gray-600">{{ product.price | money }}</p>
+        <p class="text-sm text-gray-500">{{ product.description | truncatewords: 15 }}</p>
       </div>
 
-      <!-- Варианты продукта (цвета) -->
+      <!-- Варианты продукта -->
       <div class="product-variants mt-4">
-        <h3 class="font-semibold">Варианты:</h3>
-        <div class="flex items-center space-x-2 mt-2">
+        <h3 class="font-semibold">Colors:</h3>
+        <div class="flex space-x-2">
           {% for variant in product.variants %}
-          <label class="flex items-center cursor-pointer">
-            <!-- Радио кнопка -->
-            <input type="radio" name="product_{{ product.id }}_color" class="hidden" />
-            <!-- Кружок для цвета -->
-            <span class="inline-block h-4 w-4 rounded-full border border-gray-300 shadow-inner" style="background-color: {{ variant.option1 }}"></span>
+          <label class="variant-label">
+            <input type="radio" name="product_{{ product.id }}_variant" class="hidden" />
+            <span class="h-6 w-6 inline-block rounded-full border border-gray-200" style="background-color: {{ variant.option1 }}" title="{{ variant.title }}"></span>
           </label>
           {% endfor %}
         </div>
-      </div>
-
-      <!-- Кнопка добавления в корзину -->
-      <div class="mt-6">
-        <button class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 transition-colors w-full">+</button>
       </div>
     </div>
     {% endfor %}
