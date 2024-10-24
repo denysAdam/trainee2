@@ -69,24 +69,7 @@
         productImage.src = radioBtn.dataset.imageUrl;
     }
 
-    function openModal(productId, productTitle, productImageSrc, productPrice) {
-        const modal = document.getElementById('productModal');
-        
-        if (modal) {
-            const modalImage = document.getElementById('modal-product-image');
-            const modalTitle = document.getElementById('modal-product-title');
-            const modalPrice = document.getElementById('modal-product-price');
-
-            modalImage.src = productImageSrc;
-            modalTitle.textContent = productTitle;
-            modalPrice.textContent = productPrice;
-
-
-            modal.classList.remove('hidden');
-        } else {
-            console.error("Модальное окно не найдено на странице.");
-        }
-    }
+   
 
 
     function closeModal() {
