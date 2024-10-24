@@ -1,89 +1,18 @@
-<!-- Модальное окно (по умолчанию скрыто) -->
 <div id="productModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
   <div class="bg-white p-6 rounded-lg max-w-lg w-full relative">
     <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-500">&times;</button>
     <div class="flex">
       <div class="product-image mb-4 relative">
         <img id="modal-product-image" class="w-auto h-auto" src="" alt="">
-        <button class="bg-[#CB8A3D] font-bold text-white rounded-full w-12 h-12 flex items-center justify-center absolute bottom-2 -right-6">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-          </svg>
-        </button>
       </div>
       <div class="ml-6">
         <h2 id="modal-product-title" class="text-2xl font-bold"></h2>
         <p id="modal-product-price" class="text-gray-700 text-lg font-bold mt-2"></p>
 
-        <!-- Выбор модели и цвета (например) -->
-        <div class="mt-4">
-          <h3 class="font-semibold">Select Model:</h3>
-          <div class="flex space-x-2 mt-2">
-            <button class="border px-4 py-2">iPhone 15 Pro</button>
-            <button class="border px-4 py-2">iPhone 15 Pro Max</button>
-            <button class="border px-4 py-2">iPhone 15</button>
-          </div>
-        </div>
+        <!-- Дополнительные элементы (например, выбор цвета и модели) -->
 
-        <div class="mt-4">
-          <h3 class="font-semibold">Select color:</h3>
-          <div class="product-variants mt-4">
-            <div class="flex space-x-2 justify-center" id="modal-product-variants">
-              <!-- Варианты цвета будут добавлены здесь -->
-            </div>
-          </div>
-        </div>
-        
         <button class="mt-6 w-full bg-[#CB8A3D] text-white py-2 rounded-lg font-bold">Add to Cart</button>
       </div>
     </div>
   </div>
 </div>
-
-<script>
-  // Функция для открытия модального окна и отображения данных продукта
-  function openModal(productId) {
-    const product = window.products.find(product => product.id === productId);
-
-    // Обновляем данные в модальном окне
-    document.getElementById('modal-product-image').src = product.featured_image;
-    document.getElementById('modal-product-title').textContent = product.title;
-    document.getElementById('modal-product-price').textContent = product.price;
-
-    // Обновляем варианты продукта
-    const variantContainer = document.getElementById('modal-product-variants');
-    variantContainer.innerHTML = ''; // Очищаем контейнер
-    product.variants.forEach(variant => {
-      const variantElement = document.createElement('label');
-      variantElement.classList.add('variant-label', 'cursor-pointer');
-      variantElement.innerHTML = `
-        <input type="radio" name="product_${productId}_variant" class="hidden variant-radio" data-variant-id="${variant.id}" />
-        <span class="h-6 w-6 inline-block rounded-full border border-gray-200" style="background-color: ${variant.option1};" title="${variant.title}"></span>
-      `;
-      variantContainer.appendChild(variantElement);
-    });
-
-    // Показать модальное окно
-    document.getElementById('productModal').classList.remove('hidden');
-  }
-
-  // Функция для закрытия модального окна
-  function closeModal() {
-    document.getElementById('productModal').classList.add('hidden');
-  }
-
-  // Массив с данными продуктов для примера
-  window.products = [
-    {
-      id: 1,
-      title: 'Classic Case for iPhone 15',
-      featured_image: 'https://example.com/image.jpg',
-      price: '$59.99',
-      variants: [
-        { id: 1, option1: '#000000', title: 'Black' },
-        { id: 2, option1: '#FFFFFF', title: 'White' }
-      ]
-    },
-    // Добавьте больше продуктов в массив
-  ];
-</script>
