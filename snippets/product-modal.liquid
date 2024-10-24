@@ -3,10 +3,14 @@
   <div class="bg-white p-6 rounded-lg max-w-lg w-full relative">
     <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-500">&times;</button>
     <div class="flex">
-      <div class="flex-shrink-0">
-        <!-- Картинка продукта внутри модального окна -->
-        <img id="modal-product-image" class="w-48 h-48" src="" alt="">
-      </div>
+    <div class="product-image mb-4 relative">
+          <img id="product-image-{{ product.id }}" class="w-auto h-auto" src="{{ product.featured_image | image_url: width: 300, height: 300 }}" alt="{{ product.title }}">
+          <button class="bg-[#CB8A3D] font-bold text-white rounded-full w-12 h-12 flex items-center justify-center absolute bottom-2 -right-6">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+            </svg>
+          </button>
+        </div>
       <div class="ml-6">
         <h2 id="modal-product-title" class="text-2xl font-bold"></h2>
         <p id="modal-product-price" class="text-gray-700 text-lg font-bold mt-2"></p>
@@ -21,13 +25,15 @@
         </div>
         <div class="mt-4">
           <h3 class="font-semibold">Select color:</h3>
-          <div class="flex space-x-2 mt-2">
-              {% for variant in product.variants %}
-                <label class="variant-label cursor-pointer">
-                  <input type="radio" name="product_{{ product.id }}_variant" class="hidden variant-radio" data-variant-id="{{ variant.id }}" data-image-url="{% if variant.image %}{{ variant.image | image_url: width: 300, height: 300 }}{% else %}{{ product.featured_image | image_url: width: 300, height: 300 }}{% endif %}" onclick="selectVariant(this, {{ product.id }})" />
-                  <span class="h-6 w-6 inline-block rounded-full border border-gray-200" style="background-color: {{ variant.option1 }}" title="{{ variant.title }}"></span>
-                </label>
-              {% endfor %}
+          <div class="product-variants mt-4">
+          <div class="flex space-x-2 justify-center">
+            {% for variant in product.variants %}
+            <label class="variant-label cursor-pointer">
+              <input type="radio" name="product_{{ product.id }}_variant" class="hidden variant-radio" data-variant-id="{{ variant.id }}" data-image-url="{% if variant.image %}{{ variant.image | image_url: width: 300, height: 300 }}{% else %}{{ product.featured_image | image_url: width: 300, height: 300 }}{% endif %}" onclick="selectVariant(this, {{ product.id }})" />
+              <span class="h-6 w-6 inline-block rounded-full border border-gray-200" style="background-color: {{ variant.option1 }}" title="{{ variant.title }}"></span>
+            </label>
+            {% endfor %}
+            </div>
           </div>
         </div>
         <button class="mt-6 w-full bg-[#CB8A3D] text-white py-2 rounded-lg font-bold">Add to Cart</button>
