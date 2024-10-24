@@ -68,9 +68,30 @@
       productImage.src = radioBtn.dataset.imageUrl;
     }
 
-    function openModal(productId){
-        console.log(productId);
-    }
+// Function to open the modal and display product details
+  function openModal(productId) {
+    const product = document.querySelector(`#product-${productId}`);
+    const productImage = product.querySelector('img').src;
+    const productTitle = product.querySelector('h2').textContent;
+    const productPrice = product.querySelector('p').textContent;
+    
+    // Populate modal with product data
+    const modalImage = document.getElementById('modal-product-image');
+    const modalTitle = document.getElementById('modal-product-title');
+    const modalPrice = document.getElementById('modal-product-price');
+    
+    modalImage.src = productImage;
+    modalTitle.textContent = productTitle;
+    modalPrice.textContent = productPrice;
+
+    // Open the modal
+    document.getElementById('productModal').classList.remove('hidden');
+  }
+
+  // Function to close the modal
+  function closeModal() {
+    document.getElementById('productModal').classList.add('hidden');
+  }
     
     var swiper = new Swiper('.swiper-container', {
       slidesPerView: {{ section.settings.slides_per_view }},
