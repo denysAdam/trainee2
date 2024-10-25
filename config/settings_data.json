@@ -1,0 +1,27 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "sections": {
+      "swiper-product": {
+        "type": "swiper-product",
+        "settings": {
+          "slides_per_view_lg": 4,
+          "slides_per_view_md": 2,
+          "slides_per_view_sm": 1,
+          "show_reviews": true
+        }
+      }
+    },
+    "content_for_index": [
+
+    ]
+  }
+}
