@@ -100,17 +100,17 @@
         loop: true,
         breakpoints: {
             320: {
-                slidesPerView: 1, 
+                slidesPerView: {{ section.settings.slides_per_view_sm }}, 
                 spaceBetween: 20  
             },
             
             640: {
-                slidesPerView: 2, 
+                slidesPerView: {{ section.settings.slides_per_view_md }}, 
                 spaceBetween: 30
             },
             
             1024: {
-                slidesPerView: {{ section.settings.slides_per_view }}, 
+                slidesPerView: {{ section.settings.slides_per_view_lg}}, 
                 spaceBetween: 40
             }
         }
